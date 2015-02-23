@@ -4,6 +4,7 @@
 #include <cstdlib>
 #include <fstream>
 #include <vector>
+#include <iomanip>
 
 using namespace std;
 const char* word(int);
@@ -31,7 +32,12 @@ while(resp == 1){
         for(int i = 0; i < strlen(word); i++){
                 guess[i] = '_';
         }
-        cout << guess << endl;
+        
+        cout << "Tu palabra: ";
+        for(int i = 0; i < strlen(word); i++){
+                cout << setw(2) << guess[i];
+        }
+        cout << endl << endl;
 
         char letters[20] = "";
         bool x = false;
@@ -44,12 +50,12 @@ while(resp == 1){
 
                 while(opcion < 1 || opcion > 2){
                         cout << "Opcion inválida!" << endl;
-                        cout << "\t1. Letra \n\t2. Palabra \n\tIngrese opcion: ";
+                        cout << " 1. Letra \n 2. Palabra \n Ingrese opcion: ";
                         cin >> opcion;
                 }
 
                 if (opcion == 1){
-                cout << "Letra: ";
+                cout << " Letra: ";
                 char c;
                 cin >> c;
 
@@ -61,12 +67,12 @@ while(resp == 1){
 
                         letters[pos] = c;
                         pos++;
-                        cout << "Letras: " << letters << endl;
+                        cout << " Letras: " << letters << endl;
                 }
                 
 
                 else if (opcion == 2){
-                     cout << "Palabra: ";
+                     cout << " Palabra: ";
                      string c;
                      cin >> c;
                      const char* pal = c.c_str();
@@ -78,15 +84,15 @@ while(resp == 1){
         
 
         if (x == false){
-                cout << "HAS PERDIDO :(" << endl << "La palabra era ";
+                cout << " HAS PERDIDO :(" << endl << " La palabra era ";
                 cout << word << endl;
         }
 
         else {
-                cout << "FELICIDADES! Has acertado la palabra :D" << endl;
+                cout << " FELICIDADES! Has acertado la palabra :D" << endl;
         }
 	
-        cout << "Desea jugar de nuevo[1.SI/2.NO]?: ";
+        cout << " Desea jugar de nuevo[1.SI/2.NO]?: ";
         cin >> resp;
 
         while(resp < 1 || resp > 2){
@@ -217,14 +223,18 @@ cout << endl;
 
 int progress(const char* w, char* w2, char a){
         int c = 0;
-        for (int i = 0; i < strlen(w); i++){
+        for (int i = 0; i < strlen(w); i++){ //verificar cada caracter
                 if(w[i] == a){
                         w2[i] = a;
                         c = 1;
                 }
 
         }
-        cout << w2 << endl;
+        cout << " Tu palabra: ";
+        for(int i = 0; i < strlen(w); i++){ //imprimir arreglo 
+            cout << setw(2) << w2[i];
+        }
+        cout << endl << endl;
         return c;
 }
 
@@ -233,7 +243,7 @@ string palabra(){
         vector<string> v1;
         vector<string> v2;
         vector<string> v3;
-        fstream words("diccionario.txt");
+        fstream words("diccionario.txt"); //file de palabras
         string w;
         int num;
 
