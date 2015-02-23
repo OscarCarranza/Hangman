@@ -23,7 +23,8 @@ while(resp == 1){
         cin >> dif;
         int num ;
         string w = palabra();
-        const char* word = w.c_str();
+        const char* word = new char[20];
+        word = w.c_str();
        
         char guess[strlen(word)];
         
@@ -34,14 +35,20 @@ while(resp == 1){
 
         char letters[20] = "";
         bool x = false;
-        int f = 0;
-        int pos = 0;
+        int f = 0; //fallas
+        int pos = 0; //letters
+        int opcion;
         while (x == false && f < 9){ //oportunidades
                 cout << " 1. Letra \n 2. Palabra \n Ingrese opcion: ";
-                int op;
-                cin >> op;
+                cin >> opcion;
 
-                if (op == 1){
+                while(opcion < 1 || opcion > 2){
+                        cout << "Opcion inválida!" << endl;
+                        cout << "\t1. Letra \n\t2. Palabra \n\tIngrese opcion: ";
+                        cin >> opcion;
+                }
+
+                if (opcion == 1){
                 cout << "Letra: ";
                 char c;
                 cin >> c;
@@ -58,19 +65,17 @@ while(resp == 1){
                 }
                 
 
-                else if (op == 2){
+                else if (opcion == 2){
                      cout << "Palabra: ";
                      string c;
                      cin >> c;
                      const char* pal = c.c_str();
-                     x = ganar(pal,word);   
+                     x = ganar(pal,word);
+                     falla(f+1);   
                 }
-
-                else cout << "Opcion inválida!" << endl;
-                cout << " 1. Letra \n 2. Palabra \n Ingrese opcion: ";
-                cin >> op;
-                
         }
+                
+        
 
         if (x == false){
                 cout << "HAS PERDIDO :(" << endl << "La palabra era ";
